@@ -142,6 +142,136 @@ void render(sf::RenderWindow &window)
 
 
 
+    Texture white_king;
+    white_king.loadFromFile(path + "images/" + "KW.png");
+    white_king.setSmooth(true);
+    Sprite KW;
+    KW.setTexture(white_king);
+    KW.setPosition(830,700);
+    RectangleShape kw;
+    kw.setSize(Vector2f(60,60));
+    kw.setPosition(835,705);
+
+
+    Texture black_king;
+    black_king.loadFromFile(path + "images/" + "KB.png");
+    black_king.setSmooth(true);
+    Sprite KB;
+    KB.setTexture(black_king);
+    KB.setPosition(830,760);
+    RectangleShape kb;
+    kb.setSize(Vector2f(60,60));
+    kb.setPosition(835,765);
+
+
+    Texture white_queen;
+    white_queen.loadFromFile(path + "images/" + "QW.png");
+    white_queen.setSmooth(true);
+    Sprite QW;
+    QW.setTexture(white_queen);
+    QW.setPosition(890,700);
+    RectangleShape qw;
+    qw.setSize(Vector2f(60,60));
+    qw.setPosition(895,705);
+
+
+    Texture black_queen;
+    black_queen.loadFromFile(path + "images/" + "QB.png");
+    black_queen.setSmooth(true);
+    Sprite QB;
+    QB.setTexture(black_queen);
+    QB.setPosition(890,760);
+    RectangleShape qb;
+    qb.setSize(Vector2f(60,60));
+    qb.setPosition(895,765);
+
+
+
+    Texture white_rook;
+    white_rook.loadFromFile(path + "images/" + "RW.png");
+    white_rook.setSmooth(true);
+    Sprite RW;
+    RW.setTexture(white_rook);
+    RW.setPosition(950,700);
+    RectangleShape rw;
+    rw.setSize(Vector2f(60,60));
+    rw.setPosition(955,705);
+
+    Texture black_rook;
+    black_rook.loadFromFile(path + "images/" + "RB.png");
+    black_rook.setSmooth(true);
+    Sprite RB;
+    RB.setTexture(black_rook);
+    RB.setPosition(950,760);
+    RectangleShape rb;
+    rb.setSize(Vector2f(60,60));
+    rb.setPosition(955,765);
+
+
+    Texture white_knight;
+    white_knight.loadFromFile(path + "images/" + "NW.png");
+    white_knight.setSmooth(true);
+    Sprite NW;
+    NW.setTexture(white_knight);
+    NW.setPosition(1010,700);
+    RectangleShape nw;
+    nw.setSize(Vector2f(60,60));
+    nw.setPosition(1015,705);
+
+    Texture black_knight;
+    black_knight.loadFromFile(path + "images/" + "NB.png");
+    black_knight.setSmooth(true);
+    Sprite NB;
+    NB.setTexture(black_knight);
+    NB.setPosition(1010,760);
+    RectangleShape nb;
+    nb.setSize(Vector2f(60,60));
+    nb.setPosition(1015,765);
+
+    Texture white_bishop;
+    white_bishop.loadFromFile(path + "images/" + "BW.png");
+    white_bishop.setSmooth(true);
+    Sprite BW;
+    BW.setTexture(white_bishop);
+    BW.setPosition(1070,700);
+    RectangleShape bw;
+    bw.setSize(Vector2f(60,60));
+    bw.setPosition(1075,705);
+
+
+    Texture black_bishop;
+    black_bishop.loadFromFile(path + "images/" + "BB.png");
+    black_bishop.setSmooth(true);
+    Sprite BB;
+    BB.setTexture(black_bishop);
+    BB.setPosition(1070,760);
+    RectangleShape bb;
+    bb.setSize(Vector2f(60,60));
+    bb.setPosition(1075,765);
+
+    
+    Texture white_pawn;
+    white_pawn.loadFromFile(path + "images/" + "PW.png");
+    white_pawn.setSmooth(true);
+    Sprite PW;
+    PW.setTexture(white_pawn);
+    PW.setPosition(1130,700);
+    RectangleShape pw;
+    pw.setSize(Vector2f(60,60));
+    pw.setPosition(1135,705);
+
+
+    Texture black_pawn;
+    black_pawn.loadFromFile(path + "images/" + "PB.png");
+    black_pawn.setSmooth(true);
+    Sprite PB;
+    PB.setTexture(black_pawn);
+    PB.setPosition(1130,755);
+    RectangleShape pb;
+    pb.setSize(Vector2f(60,60));
+    pb.setPosition(1135,765);
+
+
 
 
 
@@ -171,6 +301,52 @@ void render(sf::RenderWindow &window)
         window.draw(R);
         window.draw(Mode);
 
+        if(new_board)
+        {
+            window.draw(start);
+            window.draw(switch_turn);
+            window.draw(Switch);
+            window.draw(kw);
+            window.draw(KW);
+            window.draw(kb);
+            window.draw(KB);
+            window.draw(qw);
+            window.draw(QW);
+            window.draw(qb);
+            window.draw(QB);
+            window.draw(rw);
+            window.draw(RW);
+            window.draw(rb);
+            window.draw(RB);
+            window.draw(nw);
+            window.draw(NW);
+            window.draw(nb);
+            window.draw(NB);
+            window.draw(bw);
+            window.draw(BW);
+            window.draw(bb);
+            window.draw(BB);
+            window.draw(pw);
+            window.draw(PW);
+            window.draw(pb);
+            window.draw(PB);
+        }
+
+        if(!choose)
+        {
+            kw.setFillColor(Color(64,64,64));
+            kb.setFillColor(Color(64,64,64));
+            qw.setFillColor(Color(64,64,64));
+            qb.setFillColor(Color(64,64,64));
+            rw.setFillColor(Color(64,64,64));
+            rb.setFillColor(Color(64,64,64));
+            nw.setFillColor(Color(64,64,64));
+            nb.setFillColor(Color(64,64,64));
+            bw.setFillColor(Color(64,64,64));
+            bb.setFillColor(Color(64,64,64));
+            pw.setFillColor(Color(64,64,64));
+            pb.setFillColor(Color(64,64,64));
+        }
 
         (set.Turn==2 and !IS_CHECKMATE and !new_board)?text.setString("White's Turn"):text.setString("Black's Turn");
         if(new_board)
@@ -469,7 +645,77 @@ void render(sf::RenderWindow &window)
                     SetMove(CurrentBoard,5,-1);
                 }
             }
-   
+
+
+            if (event.mouseButton.button == Mouse::Left && select_piece)
+            {
+                select_piece=false;
+                int mouse_x = event.mouseButton.x;
+                int mouse_y = event.mouseButton.y;
+                if (mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
+                {
+                    int r2 = (mouse_x - set.cell_offset) / (set.cell_size);
+                    int c2 = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
+                    CurrentBoard.setcolor(r2,c2,py+1);
+                    CurrentBoard.setoccupied(r2,c2,py+1,true);
+                    CurrentBoard.settype(r2,c2,py+1,type);
+                    if(type=='K')
+                    {
+                        int king_x=CurrentBoard.get_king_pos(0,py+1);
+                        int king_y=CurrentBoard.get_king_pos(1,py+1);
+                        if(king_x!=-1)
+                        {
+                        Null n;
+                        n.set(CurrentBoard,type,king_x,king_y,0,5);
+                        }
+                        CurrentBoard.set_king_pos(r2,c2,py+1);
+                    }
+                }
+            }
+
+
+
+            if (event.mouseButton.button == Mouse::Left && new_board)
+            {
+                int mouse_x = event.mouseButton.x;
+                int mouse_y = event.mouseButton.y;
+                if (mouse_x >830  && mouse_x <1200  && mouse_y > 700 && mouse_y < 830)
+                {
+                    select_piece=true;
+                    px=(mouse_x-830)/60;
+                    py=1-(mouse_y-700)/65;
+
+                    switch (px)
+                    {
+                    case 0:
+                        type='K';
+                        (py==0)?kb.setFillColor(Color(131,122,122)):kw.setFillColor(Color(131,122,122));
+                        break;
+                    case 1:
+                        type='Q';
+                        (py==0)?qb.setFillColor(Color(131,122,122)):qw.setFillColor(Color(131,122,122));
+                        break;
+                    case 2:
+                        type='R';
+                        (py==0)?rb.setFillColor(Color(131,122,122)):rw.setFillColor(Color(131,122,122));
+                        break;
+                    case 3:
+                        type='N';
+                        (py==0)?nb.setFillColor(Color(131,122,122)):nw.setFillColor(Color(131,122,122));
+                        break;
+                    case 4:
+                        type='B';
+                        (py==0)?bb.setFillColor(Color(131,122,122)):bw.setFillColor(Color(131,122,122));
+                        break;
+                    case 5:
+                        type='P';
+                        (py==0)?pb.setFillColor(Color(131,122,122)):pw.setFillColor(Color(131,122,122));
+                        break;
+                    }
+                }
+            }
+
+
 
         }
 
