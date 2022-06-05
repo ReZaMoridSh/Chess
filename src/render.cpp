@@ -93,6 +93,39 @@ void render(sf::RenderWindow &window)
 
 
 
+    Texture mode;
+    mode.loadFromFile(path + "images/" + "mode.png");
+    mode.setSmooth(true);
+    Sprite M;
+    M.setTexture(mode);
+    M.setPosition(Vector2f(830, 415));
+    M.setScale(Vector2f(0.086, 0.08));
+    Text Mode;
+    Mode.setString("Set Your Board");
+    Mode.setPosition(835, 565);
+    Mode.setFont(font);
+    Mode.setScale(Vector2f(.8, .8));
+
+
+
+    Texture s;
+    s.loadFromFile(path + "images/" + "start.png");
+    s.setSmooth(true);
+    Sprite start;
+    start.setTexture(s);
+    start.setPosition(Vector2f(1035, 410));
+    start.setScale(Vector2f(0.33, 0.33));
+
+
+    RectangleShape switch_turn;
+    switch_turn.setSize(Vector2f(250,50));
+    switch_turn.setPosition(875,620);
+    Text Switch;
+    Switch.setFont(font);
+    Switch.setScale(1,1);
+    Switch.setPosition(915, 630);
+    Switch.setString("White's Turn");
+    Switch.setFillColor(Color::Black);
 
 
 
@@ -109,7 +142,7 @@ void render(sf::RenderWindow &window)
 
 
 
-    
+
 
 
     static bool clicked;
@@ -119,6 +152,9 @@ void render(sf::RenderWindow &window)
     static bool warn;
     static string defense_warn;
     static string mate_warn;
+    static bool new_board;
+    static bool select_piece;
+    static bool choose;
     int r, c,px,py;
     char type;
 
@@ -130,11 +166,16 @@ void render(sf::RenderWindow &window)
         window.draw(def);
         window.draw(anz);
         window.draw(text);
+        window.draw(M);
         window.draw(rs);
         window.draw(R);
+        window.draw(Mode);
 
 
-        (set.Turn==2 and !IS_CHECKMATE )?text.setString("White's Turn"):text.setString("Black's Turn");
+        (set.Turn==2 and !IS_CHECKMATE and !new_board)?text.setString("White's Turn"):text.setString("Black's Turn");
+        if(new_board)
+            text.setString("Make a Board");
+
 
         cells.resize(8);
         for (int row = 0; row < 8; row++)
@@ -188,7 +229,7 @@ void render(sf::RenderWindow &window)
         }
         if (IS_CHECKMATE)
         {
-            (set.Turn==1 )?text.setString("White wins !!"):text.setString("Black wins !!");
+            (set.Turn==1 and !new_board)?text.setString("White wins !!"):text.setString("Black wins !!");
             int king_x = CurrentBoard.get_king_pos(0, set.Turn);
             int king_y = CurrentBoard.get_king_pos(1, set.Turn);
             cells[king_x][king_y].rect.setFillColor(Color(199, 0, 57));
@@ -290,8 +331,47 @@ void render(sf::RenderWindow &window)
             }
 
 
+            if (event.mouseButton.button == Mouse::Left)
+            {
+                int mouse_x = event.mouseButton.x;
+                int mouse_y = event.mouseButton.y;
+                if (mouse_x >830  && mouse_x <990  && mouse_y > 415 && mouse_y < 565)
+                {
+                    IS_CHECK=false;
+                    IS_CHECKMATE=false;
+                    new_board=true;
+                    CurrentBoard=empty;
 
-            
+                }
+            }
+
+
+
+            if (event.mouseButton.button == Mouse::Left and new_board)
+            {
+                int mouse_x = event.mouseButton.x;
+                int mouse_y = event.mouseButton.y;
+                if (mouse_x >875  && mouse_x <1125  && mouse_y > 620 && mouse_y < 670)
+                {
+                    set.flipturn();
+                    cout<<set.Turn<<endl;
+                    Color col;
+                    if(set.Turn==1)
+                    {
+                        col=Color(51,51,51);
+                        Switch.setFillColor(Color::White);
+                        Switch.setString("Black's Turn");
+                    }
+                    else
+                    {
+                        col=Color(240,240,240);
+                        Switch.setFillColor(Color::Black);
+                        Switch.setString("White's Turn");
+                    }
+                    switch_turn.setFillColor(col);
+                }
+            }
+
 
             if (event.mouseButton.button == Mouse::Left and clicked)
             {
@@ -313,7 +393,7 @@ void render(sf::RenderWindow &window)
                 // else clicked=false;
             }
 
-            if (event.mouseButton.button == Mouse::Left && clicked)
+            if (event.mouseButton.button == Mouse::Left && clicked && !select_piece)
             {
                 int mouse_x = event.mouseButton.x;
                 int mouse_y = event.mouseButton.y;
@@ -345,7 +425,7 @@ void render(sf::RenderWindow &window)
                     clicked = false;
             }
 
-            if (event.mouseButton.button == Mouse::Left && !clicked)
+            if (event.mouseButton.button == Mouse::Left && !clicked && !select_piece)
             {
                 int mouse_x = event.mouseButton.x;
                 int mouse_y = event.mouseButton.y;
@@ -368,6 +448,7 @@ void render(sf::RenderWindow &window)
                 if (mouse_x >830  && mouse_x <990  && mouse_y > 220 && mouse_y < 370)
                 {
                     CurrentBoard=empty;
+                    new_board=false;
                     IS_CHECK=false;
                     IS_CHECKMATE=false;
                     restart();
@@ -375,6 +456,20 @@ void render(sf::RenderWindow &window)
                 }
             }
 
+
+
+            if (event.mouseButton.button == Mouse::Left && new_board && CurrentBoard.get_king_pos(0,1)!=-1 && CurrentBoard.get_king_pos(0,2)!=-1)
+            {
+                int mouse_x = event.mouseButton.x;
+                int mouse_y = event.mouseButton.y;
+                if (mouse_x > 1040 and mouse_x < 1190  && mouse_y > 415 && mouse_y < 565)
+                {
+                    new_board=false;
+                    select_piece=false;
+                    SetMove(CurrentBoard,5,-1);
+                }
+            }
+   
 
         }
 
