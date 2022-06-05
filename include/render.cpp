@@ -1,6 +1,6 @@
-#include "../include/analyze.cpp"
-#include "../include/setting.cpp"
-#include "../include/print.cpp"
+#include "analyze.cpp"
+#include "setting.cpp"
+
 void restart()
 {
     for (int i = 0; i < 8; i++)
@@ -48,7 +48,7 @@ void restart()
 
 void render(sf::RenderWindow &window)
 {
-    string path = "../resources/";
+    string path="resources/";
     Texture tx;
     tx.loadFromFile(path + "images/" + "bg1.jpg");
     Sprite sp;

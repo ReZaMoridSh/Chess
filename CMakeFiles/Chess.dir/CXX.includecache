@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/reza/Desktop/commit/src/main.cpp
+render.cpp
+/home/reza/Desktop/commit/src/render.cpp
+
+include/Chessboard.cpp
+iostream
+-
+vector
+-
+
+include/analyze.cpp
+chess_setting.cpp
+include/chess_setting.cpp
+
+include/chess_setting.cpp
+declar.cpp
+include/declar.cpp
+
+include/declar.cpp
+Chessboard.cpp
+include/Chessboard.cpp
+
+include/render.cpp
+analyze.cpp
+include/analyze.cpp
+setting.cpp
+include/setting.cpp
+
+include/setting.cpp
+SFML/Graphics.hpp
+-
+Chessboard.cpp
+include/Chessboard.cpp
+

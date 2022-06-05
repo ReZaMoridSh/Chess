@@ -1,0 +1,3 @@
+/home/reza/Desktop/commit/CMakeFiles/rebuild_cache.dir
+/home/reza/Desktop/commit/CMakeFiles/edit_cache.dir
+/home/reza/Desktop/commit/CMakeFiles/Chess.dir
