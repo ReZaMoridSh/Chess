@@ -37,6 +37,8 @@ include/setting.cpp
 include/setting.cpp
 SFML/Graphics.hpp
 -
+SFML/Audio.hpp
+-
 Chessboard.cpp
 include/Chessboard.cpp
 

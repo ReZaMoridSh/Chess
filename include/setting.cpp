@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Chessboard.cpp"
 using namespace sf;
 class setting 

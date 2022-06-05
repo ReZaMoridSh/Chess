@@ -59,6 +59,11 @@ void render(sf::RenderWindow &window)
     Cells cells;
     setting set;
 
+    SoundBuffer buffer_move;
+    buffer_move.loadFromFile(path+"sounds/"+"move.wav");
+    Sound sound_move;
+    sound_move.setBuffer(buffer_move);
+
     Texture analyze;
     analyze.loadFromFile(path + "images/" + "Analyze.png");
     analyze.setSmooth(true);
@@ -543,7 +548,7 @@ void render(sf::RenderWindow &window)
                             for (int a = 0; a < amove.length(); a = a + 4)
                                 if (r2 == amove[a] - '0' and c2 == amove[a + 2] - '0' and set.your_turn(r, c))
                                 {
-
+                                    sound_move.play();
                                     moveit(CurrentBoard, CurrentBoard.gettype(r, c), r, c, r2, c2, CurrentBoard.getcolor(r, c), 5);
 
                                     set.flipturn();
