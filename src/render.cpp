@@ -50,7 +50,7 @@ void render(sf::RenderWindow &window)
 {
     string path = "../resources/";
     Texture tx;
-    tx.loadFromFile(path + "images/" + "bg.jpg");
+    tx.loadFromFile(path + "images/" + "bg1.jpg");
     Sprite sp;
     sp.setTexture(tx);
     sp.setOrigin(0, 0);
@@ -71,11 +71,9 @@ void render(sf::RenderWindow &window)
     analyze_rect.setPosition(1040, 220);
     Text def;
     Font font;
-    font.loadFromFile(path + "fonts/" +"Impact.ttf");
+    font.loadFromFile(path + "fonts/" + "Impact.ttf");
     def.setFont(font);
     def.setScale(Vector2f(.8, .8));
-
-
 
     Texture Restart;
     Restart.loadFromFile(path + "images/" + "restart.png");
@@ -90,9 +88,6 @@ void render(sf::RenderWindow &window)
     R.setFont(font);
     R.setScale(Vector2f(.8, .8));
 
-
-
-
     Texture mode;
     mode.loadFromFile(path + "images/" + "mode.png");
     mode.setSmooth(true);
@@ -106,8 +101,6 @@ void render(sf::RenderWindow &window)
     Mode.setFont(font);
     Mode.setScale(Vector2f(.8, .8));
 
-
-
     Texture s;
     s.loadFromFile(path + "images/" + "start.png");
     s.setSmooth(true);
@@ -116,164 +109,145 @@ void render(sf::RenderWindow &window)
     start.setPosition(Vector2f(1035, 410));
     start.setScale(Vector2f(0.33, 0.33));
 
-
     RectangleShape switch_turn;
-    switch_turn.setSize(Vector2f(250,50));
-    switch_turn.setPosition(875,620);
+    switch_turn.setSize(Vector2f(250, 50));
+    switch_turn.setPosition(875, 620);
     Text Switch;
     Switch.setFont(font);
-    Switch.setScale(1,1);
+    Switch.setScale(1, 1);
     Switch.setPosition(915, 630);
     Switch.setString("White's Turn");
     Switch.setFillColor(Color::Black);
 
-
-
-
     Text text;
     Font f;
-    f.loadFromFile(path + "fonts/" +"Terserah.otf");
+    f.loadFromFile(path + "fonts/" + "Terserah.otf");
     text.setFont(f);
     text.setFillColor(Color::White);
     text.setOutlineThickness(5);
-    text.setOutlineColor(Color(131,122,122));
-    text.setScale(2,2);
+    text.setOutlineColor(Color(138,0,0));
+    text.setScale(2, 2);
     text.setPosition(840, 70);
-
-
 
     Texture white_king;
     white_king.loadFromFile(path + "images/" + "KW.png");
     white_king.setSmooth(true);
     Sprite KW;
     KW.setTexture(white_king);
-    KW.setPosition(830,700);
+    KW.setPosition(830, 700);
     RectangleShape kw;
-    kw.setSize(Vector2f(60,60));
-    kw.setPosition(835,705);
-
+    kw.setSize(Vector2f(60, 60));
+    kw.setPosition(835, 705);
 
     Texture black_king;
     black_king.loadFromFile(path + "images/" + "KB.png");
     black_king.setSmooth(true);
     Sprite KB;
     KB.setTexture(black_king);
-    KB.setPosition(830,760);
+    KB.setPosition(830, 760);
     RectangleShape kb;
-    kb.setSize(Vector2f(60,60));
-    kb.setPosition(835,765);
-
+    kb.setSize(Vector2f(60, 60));
+    kb.setPosition(835, 765);
 
     Texture white_queen;
     white_queen.loadFromFile(path + "images/" + "QW.png");
     white_queen.setSmooth(true);
     Sprite QW;
     QW.setTexture(white_queen);
-    QW.setPosition(890,700);
+    QW.setPosition(890, 700);
     RectangleShape qw;
-    qw.setSize(Vector2f(60,60));
-    qw.setPosition(895,705);
-
+    qw.setSize(Vector2f(60, 60));
+    qw.setPosition(895, 705);
 
     Texture black_queen;
     black_queen.loadFromFile(path + "images/" + "QB.png");
     black_queen.setSmooth(true);
     Sprite QB;
     QB.setTexture(black_queen);
-    QB.setPosition(890,760);
+    QB.setPosition(890, 760);
     RectangleShape qb;
-    qb.setSize(Vector2f(60,60));
-    qb.setPosition(895,765);
-
-
+    qb.setSize(Vector2f(60, 60));
+    qb.setPosition(895, 765);
 
     Texture white_rook;
     white_rook.loadFromFile(path + "images/" + "RW.png");
     white_rook.setSmooth(true);
     Sprite RW;
     RW.setTexture(white_rook);
-    RW.setPosition(950,700);
+    RW.setPosition(950, 700);
     RectangleShape rw;
-    rw.setSize(Vector2f(60,60));
-    rw.setPosition(955,705);
+    rw.setSize(Vector2f(60, 60));
+    rw.setPosition(955, 705);
 
     Texture black_rook;
     black_rook.loadFromFile(path + "images/" + "RB.png");
     black_rook.setSmooth(true);
     Sprite RB;
     RB.setTexture(black_rook);
-    RB.setPosition(950,760);
+    RB.setPosition(950, 760);
     RectangleShape rb;
-    rb.setSize(Vector2f(60,60));
-    rb.setPosition(955,765);
-
+    rb.setSize(Vector2f(60, 60));
+    rb.setPosition(955, 765);
 
     Texture white_knight;
     white_knight.loadFromFile(path + "images/" + "NW.png");
     white_knight.setSmooth(true);
     Sprite NW;
     NW.setTexture(white_knight);
-    NW.setPosition(1010,700);
+    NW.setPosition(1010, 700);
     RectangleShape nw;
-    nw.setSize(Vector2f(60,60));
-    nw.setPosition(1015,705);
+    nw.setSize(Vector2f(60, 60));
+    nw.setPosition(1015, 705);
 
     Texture black_knight;
     black_knight.loadFromFile(path + "images/" + "NB.png");
     black_knight.setSmooth(true);
     Sprite NB;
     NB.setTexture(black_knight);
-    NB.setPosition(1010,760);
+    NB.setPosition(1010, 760);
     RectangleShape nb;
-    nb.setSize(Vector2f(60,60));
-    nb.setPosition(1015,765);
+    nb.setSize(Vector2f(60, 60));
+    nb.setPosition(1015, 765);
 
     Texture white_bishop;
     white_bishop.loadFromFile(path + "images/" + "BW.png");
     white_bishop.setSmooth(true);
     Sprite BW;
     BW.setTexture(white_bishop);
-    BW.setPosition(1070,700);
+    BW.setPosition(1070, 700);
     RectangleShape bw;
-    bw.setSize(Vector2f(60,60));
-    bw.setPosition(1075,705);
-
+    bw.setSize(Vector2f(60, 60));
+    bw.setPosition(1075, 705);
 
     Texture black_bishop;
     black_bishop.loadFromFile(path + "images/" + "BB.png");
     black_bishop.setSmooth(true);
     Sprite BB;
     BB.setTexture(black_bishop);
-    BB.setPosition(1070,760);
+    BB.setPosition(1070, 760);
     RectangleShape bb;
-    bb.setSize(Vector2f(60,60));
-    bb.setPosition(1075,765);
+    bb.setSize(Vector2f(60, 60));
+    bb.setPosition(1075, 765);
 
-    
     Texture white_pawn;
     white_pawn.loadFromFile(path + "images/" + "PW.png");
     white_pawn.setSmooth(true);
     Sprite PW;
     PW.setTexture(white_pawn);
-    PW.setPosition(1130,700);
+    PW.setPosition(1130, 700);
     RectangleShape pw;
-    pw.setSize(Vector2f(60,60));
-    pw.setPosition(1135,705);
-
+    pw.setSize(Vector2f(60, 60));
+    pw.setPosition(1135, 705);
 
     Texture black_pawn;
     black_pawn.loadFromFile(path + "images/" + "PB.png");
     black_pawn.setSmooth(true);
     Sprite PB;
     PB.setTexture(black_pawn);
-    PB.setPosition(1130,755);
+    PB.setPosition(1130, 755);
     RectangleShape pb;
-    pb.setSize(Vector2f(60,60));
-    pb.setPosition(1135,765);
-
-
-
-
+    pb.setSize(Vector2f(60, 60));
+    pb.setPosition(1135, 765);
 
     static bool clicked;
     static bool IS_CHECK;
@@ -285,7 +259,7 @@ void render(sf::RenderWindow &window)
     static bool new_board;
     static bool select_piece;
     static bool choose;
-    int r, c,px,py;
+    int r, c, px, py;
     char type;
 
     while (window.isOpen())
@@ -301,7 +275,7 @@ void render(sf::RenderWindow &window)
         window.draw(R);
         window.draw(Mode);
 
-        if(new_board)
+        if (new_board)
         {
             window.draw(start);
             window.draw(switch_turn);
@@ -332,26 +306,25 @@ void render(sf::RenderWindow &window)
             window.draw(PB);
         }
 
-        if(!choose)
+        if (!choose)
         {
-            kw.setFillColor(Color(64,64,64));
-            kb.setFillColor(Color(64,64,64));
-            qw.setFillColor(Color(64,64,64));
-            qb.setFillColor(Color(64,64,64));
-            rw.setFillColor(Color(64,64,64));
-            rb.setFillColor(Color(64,64,64));
-            nw.setFillColor(Color(64,64,64));
-            nb.setFillColor(Color(64,64,64));
-            bw.setFillColor(Color(64,64,64));
-            bb.setFillColor(Color(64,64,64));
-            pw.setFillColor(Color(64,64,64));
-            pb.setFillColor(Color(64,64,64));
+            kw.setFillColor(Color(64, 64, 64));
+            kb.setFillColor(Color(64, 64, 64));
+            qw.setFillColor(Color(64, 64, 64));
+            qb.setFillColor(Color(64, 64, 64));
+            rw.setFillColor(Color(64, 64, 64));
+            rb.setFillColor(Color(64, 64, 64));
+            nw.setFillColor(Color(64, 64, 64));
+            nb.setFillColor(Color(64, 64, 64));
+            bw.setFillColor(Color(64, 64, 64));
+            bb.setFillColor(Color(64, 64, 64));
+            pw.setFillColor(Color(64, 64, 64));
+            pb.setFillColor(Color(64, 64, 64));
         }
 
-        (set.Turn==2 and !IS_CHECKMATE and !new_board)?text.setString("White's Turn"):text.setString("Black's Turn");
-        if(new_board)
+        (set.Turn == 2 and !IS_CHECKMATE and !new_board) ? text.setString("White's Turn") : text.setString("Black's Turn");
+        if (new_board)
             text.setString("Make a Board");
-
 
         cells.resize(8);
         for (int row = 0; row < 8; row++)
@@ -405,7 +378,7 @@ void render(sf::RenderWindow &window)
         }
         if (IS_CHECKMATE)
         {
-            (set.Turn==1 and !new_board)?text.setString("White wins !!"):text.setString("Black wins !!");
+            (set.Turn == 1 and !new_board) ? text.setString("White wins !!") : text.setString("Black wins !!");
             int king_x = CurrentBoard.get_king_pos(0, set.Turn);
             int king_y = CurrentBoard.get_king_pos(1, set.Turn);
             cells[king_x][king_y].rect.setFillColor(Color(199, 0, 57));
@@ -474,7 +447,6 @@ void render(sf::RenderWindow &window)
             }
         }
 
-
         for (int row = 0; row < 8; row++)
             for (int col = 0; col < 8; col++)
             {
@@ -499,226 +471,199 @@ void render(sf::RenderWindow &window)
         Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == Event::EventType::Closed)
+            switch (event.type)
             {
-                
-                window.close();
-                
-            }
-
-
-            if (event.mouseButton.button == Mouse::Left)
-            {
-                int mouse_x = event.mouseButton.x;
-                int mouse_y = event.mouseButton.y;
-                if (mouse_x >830  && mouse_x <990  && mouse_y > 415 && mouse_y < 565)
+            case Event::EventType::Closed:
+                if (event.type == Event::EventType::Closed)
                 {
-                    IS_CHECK=false;
-                    IS_CHECKMATE=false;
-                    new_board=true;
-                    CurrentBoard=empty;
-
+                    window.close();
                 }
-            }
-
-
-
-            if (event.mouseButton.button == Mouse::Left and new_board)
+                break;
+            case Event::MouseButtonPressed:
             {
-                int mouse_x = event.mouseButton.x;
-                int mouse_y = event.mouseButton.y;
-                if (mouse_x >875  && mouse_x <1125  && mouse_y > 620 && mouse_y < 670)
+                if (event.mouseButton.button == Mouse::Left)
                 {
-                    set.flipturn();
-                    cout<<set.Turn<<endl;
-                    Color col;
-                    if(set.Turn==1)
+                    int mouse_x = event.mouseButton.x;
+                    int mouse_y = event.mouseButton.y;
+                    if (mouse_x > 830 && mouse_x < 990 && mouse_y > 415 && mouse_y < 565)
                     {
-                        col=Color(51,51,51);
-                        Switch.setFillColor(Color::White);
-                        Switch.setString("Black's Turn");
+                        IS_CHECK = false;
+                        IS_CHECKMATE = false;
+                        new_board = true;
+                        CurrentBoard = empty;
                     }
-                    else
+
+                    if (new_board)
                     {
-                        col=Color(240,240,240);
-                        Switch.setFillColor(Color::Black);
-                        Switch.setString("White's Turn");
-                    }
-                    switch_turn.setFillColor(col);
-                }
-            }
-
-
-            if (event.mouseButton.button == Mouse::Left and clicked)
-            {
-                int mouse_x = event.mouseButton.x;
-                int mouse_y = event.mouseButton.y;
-                if (mouse_x > 1040 and mouse_x < 1190 and mouse_y > 220 and mouse_y < 370)
-                {
-                    if (CurrentBoard.getmove(r, c).length() > 0)
-                    {
-                        defense_warn = WarningMoveDefense(CurrentBoard, r, c, set.Turn);
-                        mate_warn = WarningMoveMate(CurrentBoard, r, c, set.Turn);
-                        warn = true;
-                    }
-                    else
-                        clicked = false;
-                }
-                else
-                    warn = false;
-                // else clicked=false;
-            }
-
-            if (event.mouseButton.button == Mouse::Left && clicked && !select_piece)
-            {
-                int mouse_x = event.mouseButton.x;
-                int mouse_y = event.mouseButton.y;
-                if (mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
-                {
-                    int r2 = (mouse_x - set.cell_offset) / (set.cell_size);
-                    int c2 = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
-                    for (int a = 0; a < amove.length(); a = a + 4)
-                        if (r2 == amove[a] - '0' and c2 == amove[a + 2] - '0' and set.your_turn(r, c))
+                        if (mouse_x > 875 && mouse_x < 1125 && mouse_y > 620 && mouse_y < 670)
                         {
-
-                            moveit(CurrentBoard, CurrentBoard.gettype(r, c), r, c, r2, c2, CurrentBoard.getcolor(r, c), 5);
-
                             set.flipturn();
-
-                            if (Is_Check(CurrentBoard, set.Turn))
-                                IS_CHECK = true;
+                            Color col;
+                            if (set.Turn == 1)
+                            {
+                                col = Color(51, 51, 51);
+                                Switch.setFillColor(Color::White);
+                                Switch.setString("Black's Turn");
+                            }
                             else
-                                IS_CHECK = false;
+                            {
+                                col = Color(240, 240, 240);
+                                Switch.setFillColor(Color::Black);
+                                Switch.setString("White's Turn");
+                            }
+                            switch_turn.setFillColor(col);
+                        }
+                    }
 
-                            if (checkmate(CurrentBoard, set.Turn))
-                                IS_CHECKMATE = true;
+                    if (clicked)
+                    {
+                        if (mouse_x > 1040 and mouse_x < 1190 and mouse_y > 220 and mouse_y < 370)
+                        {
+                            if (CurrentBoard.getmove(r, c).length() > 0)
+                            {
+                                defense_warn = WarningMoveDefense(CurrentBoard, r, c, set.Turn);
+                                mate_warn = WarningMoveMate(CurrentBoard, r, c, set.Turn);
+                                warn = true;
+                            }
+                            else
+                                clicked = false;
                         }
                         else
                             warn = false;
-                    clicked = false;
-                }
-                else if (!warn)
-                    clicked = false;
-            }
+                        // else clicked=false;
+                    }
 
-            if (event.mouseButton.button == Mouse::Left && !clicked && !select_piece)
-            {
-                int mouse_x = event.mouseButton.x;
-                int mouse_y = event.mouseButton.y;
-                if (mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
-                {
-                    r = (mouse_x - set.cell_offset) / (set.cell_size);
-                    c = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
-                    if (CurrentBoard.getoccupied(r, c) and set.your_turn(r, c) and CurrentBoard.getmove(r, c).length() > 0)
-                        clicked = true;
-                    amove = CurrentBoard.getmove(r, c);
-                }
-                else
-                    clicked = false;
-            }
-
-            if (event.mouseButton.button == Mouse::Left && !clicked)
-            {
-                int mouse_x = event.mouseButton.x;
-                int mouse_y = event.mouseButton.y;
-                if (mouse_x >830  && mouse_x <990  && mouse_y > 220 && mouse_y < 370)
-                {
-                    CurrentBoard=empty;
-                    new_board=false;
-                    IS_CHECK=false;
-                    IS_CHECKMATE=false;
-                    restart();
-                    set.Turn=2;
-                }
-            }
-
-
-
-            if (event.mouseButton.button == Mouse::Left && new_board && CurrentBoard.get_king_pos(0,1)!=-1 && CurrentBoard.get_king_pos(0,2)!=-1)
-            {
-                int mouse_x = event.mouseButton.x;
-                int mouse_y = event.mouseButton.y;
-                if (mouse_x > 1040 and mouse_x < 1190  && mouse_y > 415 && mouse_y < 565)
-                {
-                    new_board=false;
-                    select_piece=false;
-                    SetMove(CurrentBoard,5,-1);
-                }
-            }
-
-
-            if (event.mouseButton.button == Mouse::Left && select_piece)
-            {
-                select_piece=false;
-                int mouse_x = event.mouseButton.x;
-                int mouse_y = event.mouseButton.y;
-                if (mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
-                {
-                    int r2 = (mouse_x - set.cell_offset) / (set.cell_size);
-                    int c2 = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
-                    CurrentBoard.setcolor(r2,c2,py+1);
-                    CurrentBoard.setoccupied(r2,c2,py+1,true);
-                    CurrentBoard.settype(r2,c2,py+1,type);
-                    if(type=='K')
+                    if (!select_piece)
                     {
-                        int king_x=CurrentBoard.get_king_pos(0,py+1);
-                        int king_y=CurrentBoard.get_king_pos(1,py+1);
-                        if(king_x!=-1)
+                        if (mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
                         {
-                        Null n;
-                        n.set(CurrentBoard,type,king_x,king_y,0,5);
+                            int r2 = (mouse_x - set.cell_offset) / (set.cell_size);
+                            int c2 = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
+                            for (int a = 0; a < amove.length(); a = a + 4)
+                                if (r2 == amove[a] - '0' and c2 == amove[a + 2] - '0' and set.your_turn(r, c))
+                                {
+
+                                    moveit(CurrentBoard, CurrentBoard.gettype(r, c), r, c, r2, c2, CurrentBoard.getcolor(r, c), 5);
+
+                                    set.flipturn();
+
+                                    if (Is_Check(CurrentBoard, set.Turn))
+                                        IS_CHECK = true;
+                                    else
+                                        IS_CHECK = false;
+
+                                    if (checkmate(CurrentBoard, set.Turn))
+                                        IS_CHECKMATE = true;
+                                }
+                                else
+                                    warn = false;
+                            clicked = false;
                         }
-                        CurrentBoard.set_king_pos(r2,c2,py+1);
+                        else if (!warn)
+                            clicked = false;
                     }
-                }
-            }
 
-
-
-            if (event.mouseButton.button == Mouse::Left && new_board)
-            {
-                int mouse_x = event.mouseButton.x;
-                int mouse_y = event.mouseButton.y;
-                if (mouse_x >830  && mouse_x <1200  && mouse_y > 700 && mouse_y < 830)
-                {
-                    select_piece=true;
-                    px=(mouse_x-830)/60;
-                    py=1-(mouse_y-700)/65;
-
-                    switch (px)
+                    if (!select_piece)
                     {
-                    case 0:
-                        type='K';
-                        (py==0)?kb.setFillColor(Color(131,122,122)):kw.setFillColor(Color(131,122,122));
-                        break;
-                    case 1:
-                        type='Q';
-                        (py==0)?qb.setFillColor(Color(131,122,122)):qw.setFillColor(Color(131,122,122));
-                        break;
-                    case 2:
-                        type='R';
-                        (py==0)?rb.setFillColor(Color(131,122,122)):rw.setFillColor(Color(131,122,122));
-                        break;
-                    case 3:
-                        type='N';
-                        (py==0)?nb.setFillColor(Color(131,122,122)):nw.setFillColor(Color(131,122,122));
-                        break;
-                    case 4:
-                        type='B';
-                        (py==0)?bb.setFillColor(Color(131,122,122)):bw.setFillColor(Color(131,122,122));
-                        break;
-                    case 5:
-                        type='P';
-                        (py==0)?pb.setFillColor(Color(131,122,122)):pw.setFillColor(Color(131,122,122));
-                        break;
+                        if (mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
+                        {
+                            r = (mouse_x - set.cell_offset) / (set.cell_size);
+                            c = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
+                            if (CurrentBoard.getoccupied(r, c) and set.your_turn(r, c) and CurrentBoard.getmove(r, c).length() > 0)
+                                clicked = true;
+                            amove = CurrentBoard.getmove(r, c);
+                        }
+                        else
+                            clicked = false;
+                    }
+
+                    if (!clicked && mouse_x > 830 && mouse_x < 990 && mouse_y > 220 && mouse_y < 370)
+                    {
+                        CurrentBoard = empty;
+                        new_board = false;
+                        IS_CHECK = false;
+                        IS_CHECKMATE = false;
+                        restart();
+                        set.Turn = 2;
+                    }
+
+                    if (new_board && CurrentBoard.get_king_pos(0, 1) != -1 && CurrentBoard.get_king_pos(0, 2) != -1)
+                    {
+                        if (mouse_x > 1040 and mouse_x < 1190 && mouse_y > 415 && mouse_y < 565)
+                        {
+                            new_board = false;
+                            select_piece = false;
+                            SetMove(CurrentBoard, 5, -1);
+                            if (checkmate(CurrentBoard,set.Turn))
+                                IS_CHECKMATE=true;
+                            if(Is_Check(CurrentBoard,set.Turn) and !IS_CHECKMATE)
+                                IS_CHECK=true;
+                        }
+                    }
+
+                    if (select_piece)
+                    {
+                        select_piece = false;
+                        if (mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
+                        {
+                            int r2 = (mouse_x - set.cell_offset) / (set.cell_size);
+                            int c2 = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
+                            CurrentBoard.setcolor(r2, c2, py + 1);
+                            CurrentBoard.setoccupied(r2, c2, py + 1, true);
+                            CurrentBoard.settype(r2, c2, py + 1, type);
+                            if (type == 'K')
+                            {
+                                int king_x = CurrentBoard.get_king_pos(0, py + 1);
+                                int king_y = CurrentBoard.get_king_pos(1, py + 1);
+                                if (king_x != -1)
+                                {
+                                    Null n;
+                                    n.set(CurrentBoard, type, king_x, king_y, 0, 5);
+                                }
+                                CurrentBoard.set_king_pos(r2, c2, py + 1);
+                            }
+                        }
+                    }
+
+                    if (new_board && mouse_x > 830 && mouse_x < 1200 && mouse_y > 700 && mouse_y < 830)
+                    {
+                        select_piece = true;
+                        px = (mouse_x - 830) / 60;
+                        py = 1 - (mouse_y - 700) / 65;
+
+                        switch (px)
+                        {
+                        case 0:
+                            type = 'K';
+                            (py == 0) ? kb.setFillColor(Color(131, 122, 122)) : kw.setFillColor(Color(131, 122, 122));
+                            break;
+                        case 1:
+                            type = 'Q';
+                            (py == 0) ? qb.setFillColor(Color(131, 122, 122)) : qw.setFillColor(Color(131, 122, 122));
+                            break;
+                        case 2:
+                            type = 'R';
+                            (py == 0) ? rb.setFillColor(Color(131, 122, 122)) : rw.setFillColor(Color(131, 122, 122));
+                            break;
+                        case 3:
+                            type = 'N';
+                            (py == 0) ? nb.setFillColor(Color(131, 122, 122)) : nw.setFillColor(Color(131, 122, 122));
+                            break;
+                        case 4:
+                            type = 'B';
+                            (py == 0) ? bb.setFillColor(Color(131, 122, 122)) : bw.setFillColor(Color(131, 122, 122));
+                            break;
+                        case 5:
+                            type = 'P';
+                            (py == 0) ? pb.setFillColor(Color(131, 122, 122)) : pw.setFillColor(Color(131, 122, 122));
+                            break;
+                        }
                     }
                 }
             }
-
-
-
+            break;
+            }
         }
-
 
         window.display();
     }
