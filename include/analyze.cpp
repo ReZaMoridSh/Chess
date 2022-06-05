@@ -384,12 +384,6 @@ string WarningMoveMate(Chessboard &Board, int i, int j, int start)
     string answer_string;
     string MovePice1;
     int num = 0;
-    // for (int i = 0; i < 8; i++)
-    // {
-    //     for (int j = 0; j < 8; j++)
-    //     {
-    //         if (board.getcolor(i, j) == start)
-    //         {
     MovePice1 = Board.getmove(i, j);
     all = true;
     vector<string> warning_move;
@@ -398,13 +392,11 @@ string WarningMoveMate(Chessboard &Board, int i, int j, int start)
         if (mate_in_one_move(Board, warning_move, i, j, MovePice1.substr(k, 4), start))
         {
             answer_string += MovePice1.substr(k, 4);
-            cout<<MovePice1.substr(k, 4)<<endl;
             continue;
         }
         else if (mate_in_two_moves(Board, warning_move, i, j, MovePice1.substr(k, 4), start))
         {
             answer_string += MovePice1.substr(k, 4);
-            // cout<<MovePice1.substr(k, 4)<<endl;
             continue;
         }
         else
@@ -412,29 +404,6 @@ string WarningMoveMate(Chessboard &Board, int i, int j, int start)
             all = false;
         }
     }
-    // if (all && warning_move.size() != 0)
-    // {
-    //     num++;
-    //     answer.resize(num);
-    //     char color;
-    //     (board.getcolor(i, j) == 1) ? color = 'B' : (board.getcolor(i, j) == 2) ? color = 'W'
-    //                                                                             : 0;
-    //     output += char(97 + i);
-    //     output += char(49 + j);
-    //     output += board.gettype(i, j);
-    //     output += color;
-    //     answer.at(num - 1) = output;
-
-    //     output = "";
-    // }
-    // if (warning_move.size() != 0)
-    // {
-    //     answer.insert(answer.end(), warning_move.begin(), warning_move.end());
-    //     num = answer.size();
-    // }
-    //         }
-    //     }
-    // }
     return answer_string;
 }
 
@@ -445,15 +414,8 @@ string WarningMoveDefense(Chessboard &Board, int i, int j, int start)
     string answer_string;
     string MovePice1;
     int num = 0;
-    // bool all = true;
-    // for (int i = 0; i < 8; i++)
-    // {
-    //     for (int j = 0; j < 8; j++)
-    //     {
-    // if (Board.getcolor(i, j) == start)
-    // {
+    
     MovePice1 = Board.getmove(i, j);
-    // all = true;
     vector<string> warning_move;
     for (int k = 0; k < MovePice1.length(); k = k + 4)
     {
@@ -467,32 +429,7 @@ string WarningMoveDefense(Chessboard &Board, int i, int j, int start)
             answer_string += MovePice1.substr(k, 4);
             continue;
         }
-        // else
-        //     all = false;
     }
-    // if (all && warning_move.size() != 0)
-    // {
-
-    //     num++;
-    //     answer.resize(num);
-    //     char color = '-';
-    //     (Board.getcolor(i, j) == 1) ? color = 'B' : (Board.getcolor(i, j) == 2) ? color = 'W'
-    //                                                                             : 0;
-    //     output += char(97 + i);
-    //     output += char(49 + j);
-    //     output += board.gettype(i, j);
-    //     output += color;
-    //     answer.at(num - 1) = output;
-
-    //     output = "";
-    // }
-    // else if (warning_move.size() != 0)
-    // {
-    //     answer.insert(answer.end(), warning_move.begin(), warning_move.end());
-    //     num = answer.size();
-    // }
-    //     }
-    // }
-    // }
+    
     return answer_string;
 }
