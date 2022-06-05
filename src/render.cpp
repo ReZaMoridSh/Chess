@@ -251,7 +251,7 @@ void render(sf::RenderWindow &window)
 
     static bool clicked;
     static bool IS_CHECK;
-    static bool IS_CHECKMATE;
+    static bool IS_CHECKMATE=false;
     static string amove;
     static bool warn;
     static string defense_warn;
@@ -535,8 +535,9 @@ void render(sf::RenderWindow &window)
 
                     if (!select_piece)
                     {
-                        if (mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
+                        if (clicked && mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
                         {
+                            clicked=false;
                             int r2 = (mouse_x - set.cell_offset) / (set.cell_size);
                             int c2 = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
                             for (int a = 0; a < amove.length(); a = a + 4)
@@ -557,15 +558,8 @@ void render(sf::RenderWindow &window)
                                 }
                                 else
                                     warn = false;
-                            clicked = false;
                         }
-                        else if (!warn)
-                            clicked = false;
-                    }
-
-                    if (!select_piece)
-                    {
-                        if (mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
+                        if (!clicked && mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
                         {
                             r = (mouse_x - set.cell_offset) / (set.cell_size);
                             c = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
@@ -573,8 +567,22 @@ void render(sf::RenderWindow &window)
                                 clicked = true;
                             amove = CurrentBoard.getmove(r, c);
                         }
-                        else
+                        else if (!warn)
                             clicked = false;
+                    }
+
+                    if (new_board && CurrentBoard.get_king_pos(0, 1) != -1 && CurrentBoard.get_king_pos(0, 2) != -1)
+                    {
+                        if (mouse_x > 1040 and mouse_x < 1190 && mouse_y > 415 && mouse_y < 565)
+                        {
+                            new_board = false;
+                            select_piece = false;
+                            SetMove(CurrentBoard, 5, -1);
+                            if (checkmate(CurrentBoard,set.Turn))
+                                IS_CHECKMATE=true;
+                            if(Is_Check(CurrentBoard,set.Turn) && !IS_CHECKMATE)
+                                IS_CHECK=true;
+                        }
                     }
 
                     if (!clicked && mouse_x > 830 && mouse_x < 990 && mouse_y > 220 && mouse_y < 370)
@@ -587,19 +595,7 @@ void render(sf::RenderWindow &window)
                         set.Turn = 2;
                     }
 
-                    if (new_board && CurrentBoard.get_king_pos(0, 1) != -1 && CurrentBoard.get_king_pos(0, 2) != -1)
-                    {
-                        if (mouse_x > 1040 and mouse_x < 1190 && mouse_y > 415 && mouse_y < 565)
-                        {
-                            new_board = false;
-                            select_piece = false;
-                            SetMove(CurrentBoard, 5, -1);
-                            if (checkmate(CurrentBoard,set.Turn))
-                                IS_CHECKMATE=true;
-                            if(Is_Check(CurrentBoard,set.Turn) and !IS_CHECKMATE)
-                                IS_CHECK=true;
-                        }
-                    }
+
 
                     if (select_piece)
                     {
