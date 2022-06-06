@@ -73,6 +73,43 @@ void render(sf::RenderWindow &window)
     Sound sound_move;
     sound_move.setBuffer(buffer_move);
 
+    SoundBuffer buffer_click;
+    buffer_click.loadFromFile(path + "sounds/" + "click.wav");
+    Sound sound_click;
+    sound_click.setBuffer(buffer_click);
+
+    SoundBuffer buffer_click1;
+    buffer_click1.loadFromFile(path + "sounds/" + "click1.wav");
+    Sound sound_click1;
+    sound_click1.setBuffer(buffer_click1);
+
+    SoundBuffer buffer_click2;
+    buffer_click2.loadFromFile(path + "sounds/" + "click2.wav");
+    Sound sound_click2;
+    sound_click2.setBuffer(buffer_click2);
+
+    SoundBuffer buffer_piece;
+    buffer_piece.loadFromFile(path + "sounds/" + "piece.wav");
+    Sound sound_piece;
+    sound_piece.setBuffer(buffer_piece);
+
+    // SoundBuffer buffer_button;
+    // buffer_button.loadFromFile(path + "sounds/" + "button.wav");
+    // Sound sound_button;
+    // sound_button.setBuffer(buffer_button);
+
+    SoundBuffer buffer_done;
+    buffer_done.loadFromFile(path + "sounds/" + "done.wav");
+    Sound sound_done;
+    sound_done.setBuffer(buffer_done);
+
+    Texture border_tex;
+    border_tex.loadFromFile(path+"images/"+"border.png");
+    Sprite border;
+    border.setPosition(820,675);
+    border.setTexture(border_tex);
+    border.setScale(1.5,0.7);
+
     Texture analyze;
     analyze.loadFromFile(path + "images/" + "Analyze.png");
     analyze.setSmooth(true);
@@ -197,9 +234,7 @@ void render(sf::RenderWindow &window)
     Sprite KW;
     KW.setTexture(white_king);
     KW.setPosition(830, 700);
-    RectangleShape kw;
-    kw.setSize(Vector2f(60, 60));
-    kw.setPosition(835, 705);
+
 
     Texture black_king;
     black_king.loadFromFile(path + "images/" + "KB.png");
@@ -207,9 +242,7 @@ void render(sf::RenderWindow &window)
     Sprite KB;
     KB.setTexture(black_king);
     KB.setPosition(830, 760);
-    RectangleShape kb;
-    kb.setSize(Vector2f(60, 60));
-    kb.setPosition(835, 765);
+ 
 
     Texture white_queen;
     white_queen.loadFromFile(path + "images/" + "QW.png");
@@ -217,9 +250,7 @@ void render(sf::RenderWindow &window)
     Sprite QW;
     QW.setTexture(white_queen);
     QW.setPosition(890, 700);
-    RectangleShape qw;
-    qw.setSize(Vector2f(60, 60));
-    qw.setPosition(895, 705);
+   
 
     Texture black_queen;
     black_queen.loadFromFile(path + "images/" + "QB.png");
@@ -227,9 +258,7 @@ void render(sf::RenderWindow &window)
     Sprite QB;
     QB.setTexture(black_queen);
     QB.setPosition(890, 760);
-    RectangleShape qb;
-    qb.setSize(Vector2f(60, 60));
-    qb.setPosition(895, 765);
+
 
     Texture white_rook;
     white_rook.loadFromFile(path + "images/" + "RW.png");
@@ -237,9 +266,7 @@ void render(sf::RenderWindow &window)
     Sprite RW;
     RW.setTexture(white_rook);
     RW.setPosition(950, 700);
-    RectangleShape rw;
-    rw.setSize(Vector2f(60, 60));
-    rw.setPosition(955, 705);
+ 
 
     Texture black_rook;
     black_rook.loadFromFile(path + "images/" + "RB.png");
@@ -247,9 +274,7 @@ void render(sf::RenderWindow &window)
     Sprite RB;
     RB.setTexture(black_rook);
     RB.setPosition(950, 760);
-    RectangleShape rb;
-    rb.setSize(Vector2f(60, 60));
-    rb.setPosition(955, 765);
+  
 
     Texture white_knight;
     white_knight.loadFromFile(path + "images/" + "NW.png");
@@ -257,9 +282,7 @@ void render(sf::RenderWindow &window)
     Sprite NW;
     NW.setTexture(white_knight);
     NW.setPosition(1010, 700);
-    RectangleShape nw;
-    nw.setSize(Vector2f(60, 60));
-    nw.setPosition(1015, 705);
+  
 
     Texture black_knight;
     black_knight.loadFromFile(path + "images/" + "NB.png");
@@ -267,9 +290,7 @@ void render(sf::RenderWindow &window)
     Sprite NB;
     NB.setTexture(black_knight);
     NB.setPosition(1010, 760);
-    RectangleShape nb;
-    nb.setSize(Vector2f(60, 60));
-    nb.setPosition(1015, 765);
+ 
 
     Texture white_bishop;
     white_bishop.loadFromFile(path + "images/" + "BW.png");
@@ -277,9 +298,7 @@ void render(sf::RenderWindow &window)
     Sprite BW;
     BW.setTexture(white_bishop);
     BW.setPosition(1070, 700);
-    RectangleShape bw;
-    bw.setSize(Vector2f(60, 60));
-    bw.setPosition(1075, 705);
+ 
 
     Texture black_bishop;
     black_bishop.loadFromFile(path + "images/" + "BB.png");
@@ -287,9 +306,7 @@ void render(sf::RenderWindow &window)
     Sprite BB;
     BB.setTexture(black_bishop);
     BB.setPosition(1070, 760);
-    RectangleShape bb;
-    bb.setSize(Vector2f(60, 60));
-    bb.setPosition(1075, 765);
+
 
     Texture white_pawn;
     white_pawn.loadFromFile(path + "images/" + "PW.png");
@@ -297,9 +314,7 @@ void render(sf::RenderWindow &window)
     Sprite PW;
     PW.setTexture(white_pawn);
     PW.setPosition(1130, 700);
-    RectangleShape pw;
-    pw.setSize(Vector2f(60, 60));
-    pw.setPosition(1135, 705);
+
 
     Texture black_pawn;
     black_pawn.loadFromFile(path + "images/" + "PB.png");
@@ -307,9 +322,7 @@ void render(sf::RenderWindow &window)
     Sprite PB;
     PB.setTexture(black_pawn);
     PB.setPosition(1130, 755);
-    RectangleShape pb;
-    pb.setSize(Vector2f(60, 60));
-    pb.setPosition(1135, 765);
+ 
     static bool clicked;
     static bool IS_CHECK;
     static bool IS_CHECKMATE;
@@ -346,47 +359,22 @@ void render(sf::RenderWindow &window)
             window.draw(start);
             window.draw(switch_turn);
             window.draw(Switch);
-            window.draw(kw);
+            window.draw(border);
             window.draw(KW);
-            window.draw(kb);
             window.draw(KB);
-            window.draw(qw);
             window.draw(QW);
-            window.draw(qb);
             window.draw(QB);
-            window.draw(rw);
             window.draw(RW);
-            window.draw(rb);
             window.draw(RB);
-            window.draw(nw);
             window.draw(NW);
-            window.draw(nb);
             window.draw(NB);
-            window.draw(bw);
             window.draw(BW);
-            window.draw(bb);
             window.draw(BB);
-            window.draw(pw);
             window.draw(PW);
-            window.draw(pb);
             window.draw(PB);
         }
 
-        if (!choose)
-        {
-            kw.setFillColor(Color(64, 64, 64));
-            kb.setFillColor(Color(64, 64, 64));
-            qw.setFillColor(Color(64, 64, 64));
-            qb.setFillColor(Color(64, 64, 64));
-            rw.setFillColor(Color(64, 64, 64));
-            rb.setFillColor(Color(64, 64, 64));
-            nw.setFillColor(Color(64, 64, 64));
-            nb.setFillColor(Color(64, 64, 64));
-            bw.setFillColor(Color(64, 64, 64));
-            bb.setFillColor(Color(64, 64, 64));
-            pw.setFillColor(Color(64, 64, 64));
-            pb.setFillColor(Color(64, 64, 64));
-        }
+        
 
         if (set.Turn == 2 and !IS_CHECKMATE and !new_board and !IS_DRAW)
             text.setString("White's Turn");
@@ -593,6 +581,7 @@ void render(sf::RenderWindow &window)
                     int mouse_y = event.mouseButton.y;
                     if (mouse_x > 830 && mouse_x < 990 && mouse_y > 415 && mouse_y < 565)
                     {
+                        sound_piece.play();
                         IS_CHECK = false;
                         IS_CHECKMATE = false;
                         IS_DRAW = false;
@@ -601,6 +590,7 @@ void render(sf::RenderWindow &window)
                         set.Turn = 2;
                         Switch.setString("White's Turn");
                         Switch.setFillColor(Color::Black);
+                        switch_turn.setFillColor(Color::White);
                     }
 
                     if (PrRender and mouse_x > 280 && mouse_x < 500 && mouse_y > 300 && mouse_y < 520)
@@ -637,6 +627,7 @@ void render(sf::RenderWindow &window)
                         {
                             set.flipturn();
                             (set.Turn == 1) ? Next_Player = 2 : Next_Player = 1;
+                            sound_click1.play();
                             Color col;
                             if (set.Turn == 1)
                             {
@@ -660,10 +651,12 @@ void render(sf::RenderWindow &window)
                         {
                             if (CurrentBoard.getmove(r, c).length() > 0)
                             {
+                                sound_click.play();
                                 defense_warn = WarningMoveDefense(CurrentBoard, r, c, set.Turn);
                                 mate_warn = WarningMoveMate(CurrentBoard, r, c, set.Turn);
                                 draw_warn = WarningDraw(CurrentBoard, r, c, set.Turn);
                                 warn = true;
+                                sound_done.play();
                             }
                             else
                                 clicked = false;
@@ -717,6 +710,7 @@ void render(sf::RenderWindow &window)
                     {
                         if (mouse_x > 1040 and mouse_x < 1190 && mouse_y > 415 && mouse_y < 565)
                         {
+                            sound_click.play();
                             new_board = false;
                             select_piece = false;
                             SetMove(CurrentBoard, 5, -1);
@@ -735,6 +729,7 @@ void render(sf::RenderWindow &window)
                         IS_CHECKMATE = false;
                         IS_DRAW = false;
                         promote = false;
+                        sound_click.play();
                         restart();
                         set.Turn = 2;
                     }
@@ -744,6 +739,7 @@ void render(sf::RenderWindow &window)
                         select_piece = false;
                         if (mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
                         {
+                            sound_move.play();
                             int r2 = (mouse_x - set.cell_offset) / (set.cell_size);
                             int c2 = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
                             CurrentBoard.setcolor(r2, c2, py + 1);
@@ -765,8 +761,8 @@ void render(sf::RenderWindow &window)
 
                     if (new_board && mouse_x > 830 && mouse_x < 1200 && mouse_y > 700 && mouse_y < 830)
                     {
+                        sound_click2.play();
                         select_piece = true;
-                        choose = true;
                         px = (mouse_x - 830) / 60;
                         py = 1 - (mouse_y - 700) / 65;
 
@@ -774,32 +770,24 @@ void render(sf::RenderWindow &window)
                         {
                         case 0:
                             type = 'K';
-                            (py == 0) ? kb.setFillColor(Color(131, 122, 122)) : kw.setFillColor(Color(131, 122, 122));
                             break;
                         case 1:
                             type = 'Q';
-                            (py == 0) ? qb.setFillColor(Color(131, 122, 122)) : qw.setFillColor(Color(131, 122, 122));
                             break;
                         case 2:
                             type = 'R';
-                            (py == 0) ? rb.setFillColor(Color(131, 122, 122)) : rw.setFillColor(Color(131, 122, 122));
                             break;
                         case 3:
                             type = 'N';
-                            (py == 0) ? nb.setFillColor(Color(131, 122, 122)) : nw.setFillColor(Color(131, 122, 122));
                             break;
                         case 4:
                             type = 'B';
-                            (py == 0) ? bb.setFillColor(Color(131, 122, 122)) : bw.setFillColor(Color(131, 122, 122));
                             break;
                         case 5:
                             type = 'P';
-                            (py == 0) ? pb.setFillColor(Color(131, 122, 122)) : pw.setFillColor(Color(131, 122, 122));
                             break;
                         }
                     }
-                    else
-                        choose = false;
                 }
             }
             break;
