@@ -604,12 +604,12 @@ void render(sf::RenderWindow &window)
                             queen q;
                             q.set(CurrentBoard,'Q',rm,cm,Next_Player,5);
                         }
-                        else if(piece_x==0 and piece_y==1)
+                        else if(piece_x==1 and piece_y==0)
                         {
                             rook r;
                             r.set(CurrentBoard,'R',rm,cm,Next_Player,5);
                         }
-                        else if(piece_x==1 and piece_y==0)
+                        else if(piece_x==0 and piece_y==1)
                         {
                             knight n;
                             n.set(CurrentBoard,'N',rm,cm,Next_Player,5);
