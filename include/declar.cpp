@@ -14,4 +14,4 @@ void setboard();
 void restart();
 string WarningMoveMate(int start);
 string WarningMoveDefense(Chessboard & Board,int i,int j,int start);
-bool oppenentCheck(Chessboard Board, char type, int x_src, int y_src, int x_dest, int y_dest, int nextplayer);
+bool Draw(Chessboard &Board, int player);

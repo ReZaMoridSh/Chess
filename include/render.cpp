@@ -48,7 +48,7 @@ void restart()
 
 void render(sf::RenderWindow &window)
 {
-    string path="resources/";
+    string path = "resources/";
     Texture tx;
     tx.loadFromFile(path + "images/" + "bg1.jpg");
     Sprite sp;
@@ -60,7 +60,7 @@ void render(sf::RenderWindow &window)
     setting set;
 
     SoundBuffer buffer_move;
-    buffer_move.loadFromFile(path+"sounds/"+"move.wav");
+    buffer_move.loadFromFile(path + "sounds/" + "move.wav");
     Sound sound_move;
     sound_move.setBuffer(buffer_move);
 
@@ -130,7 +130,7 @@ void render(sf::RenderWindow &window)
     text.setFont(f);
     text.setFillColor(Color::White);
     text.setOutlineThickness(5);
-    text.setOutlineColor(Color(138,0,0));
+    text.setOutlineColor(Color(138, 0, 0));
     text.setScale(2, 2);
     text.setPosition(840, 70);
 
@@ -256,11 +256,13 @@ void render(sf::RenderWindow &window)
 
     static bool clicked;
     static bool IS_CHECK;
-    static bool IS_CHECKMATE=false;
+    static bool IS_CHECKMATE;
+    static bool IS_DRAW;
     static string amove;
     static bool warn;
     static string defense_warn;
     static string mate_warn;
+    static string draw_warn;
     static bool new_board;
     static bool select_piece;
     static bool choose;
@@ -327,7 +329,10 @@ void render(sf::RenderWindow &window)
             pb.setFillColor(Color(64, 64, 64));
         }
 
-        (set.Turn == 2 and !IS_CHECKMATE and !new_board) ? text.setString("White's Turn") : text.setString("Black's Turn");
+        if (set.Turn == 2 and !IS_CHECKMATE and !new_board and !IS_DRAW)
+            text.setString("White's Turn");
+        else if (set.Turn == 1 and !IS_CHECKMATE and !new_board and !IS_DRAW)
+            text.setString("Black's Turn");
         if (new_board)
             text.setString("Make a Board");
 
@@ -390,6 +395,9 @@ void render(sf::RenderWindow &window)
             window.draw(cells[king_x][king_y].rect);
         }
 
+        if (IS_DRAW)
+            text.setString("    DRAW !!");
+
         if (IS_CHECK and !IS_CHECKMATE)
         {
             int king_x = CurrentBoard.get_king_pos(0, set.Turn);
@@ -450,6 +458,28 @@ void render(sf::RenderWindow &window)
                     window.draw(rec);
                 }
             }
+
+            for (int w = 0; w < draw_warn.length(); w = w + 4)
+            {
+                int X_dest = draw_warn[w] - '0';
+                int Y_dest = draw_warn[w + 2] - '0';
+                if (!CurrentBoard.getoccupied(X_dest, Y_dest))
+                {
+                    CircleShape circle;
+                    circle.setRadius(12);
+                    circle.setFillColor(Color::White);
+                    circle.setPosition(set.set_cicle_position(X_dest, Y_dest));
+                    window.draw(circle);
+                }
+                else
+                {
+                    RectangleShape rec;
+                    rec.setSize(Vector2f(70, 10));
+                    rec.setFillColor(Color::White);
+                    rec.setPosition(set.set_rec_position(X_dest, Y_dest));
+                    window.draw(rec);
+                }
+            }
         }
 
         for (int row = 0; row < 8; row++)
@@ -494,8 +524,12 @@ void render(sf::RenderWindow &window)
                     {
                         IS_CHECK = false;
                         IS_CHECKMATE = false;
+                        IS_DRAW = false;
                         new_board = true;
                         CurrentBoard = empty;
+                        set.Turn = 2;
+                        Switch.setString("White's Turn");
+                        Switch.setFillColor(Color::Black);
                     }
 
                     if (new_board)
@@ -528,6 +562,7 @@ void render(sf::RenderWindow &window)
                             {
                                 defense_warn = WarningMoveDefense(CurrentBoard, r, c, set.Turn);
                                 mate_warn = WarningMoveMate(CurrentBoard, r, c, set.Turn);
+                                draw_warn = WarningDraw(CurrentBoard, r, c, set.Turn);
                                 warn = true;
                             }
                             else
@@ -535,14 +570,13 @@ void render(sf::RenderWindow &window)
                         }
                         else
                             warn = false;
-                        // else clicked=false;
                     }
 
                     if (!select_piece)
                     {
                         if (clicked && mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
                         {
-                            clicked=false;
+                            clicked = false;
                             int r2 = (mouse_x - set.cell_offset) / (set.cell_size);
                             int c2 = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
                             for (int a = 0; a < amove.length(); a = a + 4)
@@ -553,13 +587,14 @@ void render(sf::RenderWindow &window)
 
                                     set.flipturn();
 
-                                    if (Is_Check(CurrentBoard, set.Turn))
+                                    if (checkmate(CurrentBoard, set.Turn))
+                                        IS_CHECKMATE = true;
+                                    if (!IS_CHECKMATE && Is_Check(CurrentBoard, set.Turn))
                                         IS_CHECK = true;
                                     else
                                         IS_CHECK = false;
-
-                                    if (checkmate(CurrentBoard, set.Turn))
-                                        IS_CHECKMATE = true;
+                                    if (!IS_CHECKMATE && Draw(CurrentBoard, set.Turn))
+                                        IS_DRAW = true;
                                 }
                                 else
                                     warn = false;
@@ -583,10 +618,10 @@ void render(sf::RenderWindow &window)
                             new_board = false;
                             select_piece = false;
                             SetMove(CurrentBoard, 5, -1);
-                            if (checkmate(CurrentBoard,set.Turn))
-                                IS_CHECKMATE=true;
-                            if(Is_Check(CurrentBoard,set.Turn) && !IS_CHECKMATE)
-                                IS_CHECK=true;
+                            if (checkmate(CurrentBoard, set.Turn))
+                                IS_CHECKMATE = true;
+                            if (Is_Check(CurrentBoard, set.Turn) && !IS_CHECKMATE)
+                                IS_CHECK = true;
                         }
                     }
 
@@ -596,11 +631,10 @@ void render(sf::RenderWindow &window)
                         new_board = false;
                         IS_CHECK = false;
                         IS_CHECKMATE = false;
+                        IS_DRAW = false;
                         restart();
                         set.Turn = 2;
                     }
-
-
 
                     if (select_piece)
                     {
@@ -629,6 +663,7 @@ void render(sf::RenderWindow &window)
                     if (new_board && mouse_x > 830 && mouse_x < 1200 && mouse_y > 700 && mouse_y < 830)
                     {
                         select_piece = true;
+                        choose = true;
                         px = (mouse_x - 830) / 60;
                         py = 1 - (mouse_y - 700) / 65;
 
@@ -660,6 +695,8 @@ void render(sf::RenderWindow &window)
                             break;
                         }
                     }
+                    else
+                        choose = false;
                 }
             }
             break;

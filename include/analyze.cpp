@@ -1,59 +1,5 @@
 #include "chess_setting.cpp"
 
-bool checkmate(Chessboard mateboard, int player)
-{
-    bool checkmate = true;
-    string move;
-    for (int i = 0; i < 8; i++)
-        for (int j = 0; j < 8; j++)
-            if (mateboard.getcolor(i, j) == player)
-            {
-                move = mateboard.getmove(i, j);
-                for (int k = 0; k < move.length(); k = k + 4)
-                {
-                    int xm, ym;
-                    xm = move[k] - '0';
-                    ym = move[k + 2] - '0';
-                    if (!Check(mateboard, mateboard.gettype(i, j), i, j, xm, ym, player))
-                    {
-                        checkmate = false;
-                        return checkmate;
-                    }
-                }
-            }
-    return checkmate;
-}
-
-bool oppenentCheck(Chessboard Board, char type, int x_src, int y_src, int x_dest, int y_dest, int nextplayer)
-{
-    ChM = Board;
-    bool CHECK = false;
-    int player = 0;
-    (nextplayer == 1) ? player = 2 : player = 1;
-    string move;
-    moveit(ChM, type, x_src, y_src, x_dest, y_dest, player, -1);
-    for (int i = 0; i < 8; i++)
-        for (int j = 0; j < 8; j++)
-        {
-            if (ChM.getcolor(i, j) == player)
-            {
-                move = ChM.getmove(i, j);
-                for (int k = 0; k < move.length(); k = k + 4)
-                {
-                    int x, y;
-                    x = move[k] - '0';
-                    y = move[k + 2] - '0';
-                    if (x == ChM.get_king_pos(0, nextplayer) && y == ChM.get_king_pos(1, nextplayer))
-                    {
-                        CHECK = true;
-                        return CHECK;
-                    }
-                }
-            }
-        }
-    return CHECK;
-}
-
 bool Is_Check(Chessboard &Board, int player)
 {
     bool CHECK = false;
@@ -83,6 +29,54 @@ bool Is_Check(Chessboard &Board, int player)
     return CHECK;
 }
 
+bool Draw(Chessboard &Board, int player)
+{
+    string move;
+    if (Is_Check(Board, player))
+        return false;
+    else
+    {
+        for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 8; j++)
+                if (Board.getcolor(i, j) == player)
+                {
+                    move = Board.getmove(i, j);
+                    if (move.length() > 0)
+                        return false;
+                }
+    }
+    return true;
+}
+
+bool checkmate(Chessboard mateboard, int player)
+{
+    bool checkmate = true;
+    string move;
+    if (Draw(mateboard, player))
+        return false;
+    else
+    {
+        for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 8; j++)
+                if (mateboard.getcolor(i, j) == player)
+                {
+                    move = mateboard.getmove(i, j);
+                    for (int k = 0; k < move.length(); k = k + 4)
+                    {
+                        int xm, ym;
+                        xm = move[k] - '0';
+                        ym = move[k + 2] - '0';
+                        if (!Check(mateboard, mateboard.gettype(i, j), i, j, xm, ym, player))
+                        {
+                            checkmate = false;
+                            return checkmate;
+                        }
+                    }
+                }
+    }
+    return checkmate;
+}
+
 bool mate_in_two_moves(Chessboard &Board, vector<string> &warning, int i, int j, string move, int start)
 {
     bool mate = false;
@@ -96,6 +90,8 @@ bool mate_in_two_moves(Chessboard &Board, vector<string> &warning, int i, int j,
     (start == 1) ? next_player = 2 : next_player = 1;
     board1 = Board;
     moveit(board1, Board.gettype(i, j), i, j, move[0] - '0', move[2] - '0', Board.getcolor(i, j), 1);
+    if(Draw(board1,next_player))
+        return false;
     for (int u = 0; u < 8; u++)
     {
         for (int w = 0; w < 8; w++)
@@ -126,9 +122,7 @@ bool mate_in_two_moves(Chessboard &Board, vector<string> &warning, int i, int j,
                                     x3 = MovePice3[l] - '0';
                                     y3 = MovePice3[l + 2] - '0';
                                     moveit(board3, board2.gettype(n, m), n, m, x3, y3, board2.getcolor(n, m), 3);
-                                    if (!checkmate(board3, next_player))
-                                        continue;
-                                    if (oppenentCheck(board2, board2.gettype(n, m), n, m, x3, y3, next_player))
+                                    if (checkmate(board3, next_player))
                                     {
                                         mate = true;
                                         BREAK = true;
@@ -178,10 +172,7 @@ bool mate_in_one_move(Chessboard &Board, vector<string> &warning, int i, int j, 
     xx = move[0] - '0';
     yy = move[2] - '0';
     moveit(board1, Board.gettype(i, j), i, j, xx, yy, start, 1);
-
-    if (!checkmate(board1, nextplayer))
-        return false;
-    if (oppenentCheck(Board, Board.gettype(i, j), i, j, xx, yy, nextplayer))
+    if (checkmate(board1, nextplayer))
     {
         mate = true;
         num++;
@@ -294,9 +285,7 @@ bool defense_in_one_move(Chessboard &Board, vector<string> &warning, int i, int 
                     x2 = MovePice2[z] - '0';
                     y2 = MovePice2[z + 2] - '0';
                     moveit(board2, board1.gettype(u, w), u, w, x2, y2, board1.getcolor(u, w), 2);
-                    if (!checkmate(board2, start))
-                        continue;
-                    if (oppenentCheck(board1, board1.gettype(u, w), u, w, x2, y2, start))
+                    if (checkmate(board2,start))
                     {
 
                         num++;
@@ -350,9 +339,7 @@ bool Can_Oppenent_Mate(int x, int y, int player)
                         x4 = MovePice4[d] - '0';
                         y4 = MovePice4[d + 2] - '0';
                         moveit(board4, board3.gettype(j, k), j, k, x4, y4, board3.getcolor(j, k), 4);
-                        if (!checkmate(board4, player))
-                            continue;
-                        if (oppenentCheck(board3, board3.gettype(j, k), j, k, x4, y4, player))
+                        if (checkmate(board4, player))
                         {
                             win++;
                             BREAK = true;
@@ -383,9 +370,7 @@ string WarningMoveMate(Chessboard &Board, int i, int j, int start)
     vector<string> answer;
     string answer_string;
     string MovePice1;
-    int num = 0;
     MovePice1 = Board.getmove(i, j);
-    all = true;
     vector<string> warning_move;
     for (int k = 0; k < MovePice1.length(); k = k + 4)
     {
@@ -399,10 +384,6 @@ string WarningMoveMate(Chessboard &Board, int i, int j, int start)
             answer_string += MovePice1.substr(k, 4);
             continue;
         }
-        else
-        {
-            all = false;
-        }
     }
     return answer_string;
 }
@@ -413,8 +394,7 @@ string WarningMoveDefense(Chessboard &Board, int i, int j, int start)
     vector<string> answer;
     string answer_string;
     string MovePice1;
-    int num = 0;
-    
+
     MovePice1 = Board.getmove(i, j);
     vector<string> warning_move;
     for (int k = 0; k < MovePice1.length(); k = k + 4)
@@ -430,6 +410,26 @@ string WarningMoveDefense(Chessboard &Board, int i, int j, int start)
             continue;
         }
     }
-    
+
+    return answer_string;
+}
+
+string WarningDraw(Chessboard &Board, int i, int j, int start)
+{
+    string answer_string;
+    string MovePice1;
+    string move;
+    int next_player;
+    (start==1)?next_player=2:next_player=1;
+
+    MovePice1 = Board.getmove(i, j);
+    for (int k = 0; k < MovePice1.length(); k = k + 4)
+    {
+        move=MovePice1.substr(k, 4);
+        board1=Board;
+        moveit(board1,Board.gettype(i,j),i,j,move[0]-'0',move[2]-'0',start,1);
+        if(Draw(board1,next_player))
+            answer_string+=move;
+    }
     return answer_string;
 }
