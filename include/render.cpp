@@ -339,7 +339,7 @@ void render(sf::RenderWindow &window)
     static bool PrRender;
     int r, c, rm, cm, px, py;
     char type;
-    static int Next_Player;
+    static int Next_Player=1;
 
     while (window.isOpen())
     {
@@ -706,19 +706,19 @@ void render(sf::RenderWindow &window)
                             clicked = false;
                     }
 
-                    if (new_board && CurrentBoard.get_king_pos(0, 1) != -1 && CurrentBoard.get_king_pos(0, 2) != -1 and !Is_Check(CurrentBoard, Next_Player))
+                    if (mouse_x > 1040 and mouse_x < 1190 && mouse_y > 415 && mouse_y < 565 && new_board && CurrentBoard.get_king_pos(0, 1) != -1 && CurrentBoard.get_king_pos(0, 2) != -1)
                     {
-                        if (mouse_x > 1040 and mouse_x < 1190 && mouse_y > 415 && mouse_y < 565)
-                        {
+                            SetMove(CurrentBoard, 5, -1);
+                            if(!Is_Check(CurrentBoard, Next_Player))
+                            {
                             sound_click.play();
                             new_board = false;
                             select_piece = false;
-                            SetMove(CurrentBoard, 5, -1);
                             if (checkmate(CurrentBoard, set.Turn))
                                 IS_CHECKMATE = true;
                             if (Is_Check(CurrentBoard, set.Turn) && !IS_CHECKMATE)
                                 IS_CHECK = true;
-                        }
+                            }
                     }
 
                     if (!clicked && mouse_x > 830 && mouse_x < 990 && mouse_y > 220 && mouse_y < 370)
