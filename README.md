@@ -5,7 +5,7 @@ This program is written is c++ language and it can analyze Mate-In-Two and Avoid
 Also you can set your desired board for analyze.
 The game's UI is written in SFML lib;
 we can see the overview of game as follow:
-![Screenshot](screenshot.png)
+<image src=https://github.com/ReZaMoridSh/Chess/blob/main/docs/screenshot.png width="800" height="550">
 ## Run
 for run the game,first you must install SFML lib in your system
 in linux enter the below code in your terminal:
@@ -19,3 +19,4 @@ make
 ./Chess
 ```
 and finally you can enjoy it.
+
