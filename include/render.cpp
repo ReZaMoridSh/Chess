@@ -1,6 +1,15 @@
 #include "analyze.cpp"
 #include "setting.cpp"
 
+bool Promote(int x, int y, int color)
+{
+    if (CurrentBoard.gettype(x, y) != 'P')
+        return false;
+    else if ((color == 1 and y == 0) or (color == 2 and y == 7))
+        return true;
+    return false;
+}
+
 void restart()
 {
     for (int i = 0; i < 8; i++)
@@ -74,11 +83,61 @@ void render(sf::RenderWindow &window)
     RectangleShape analyze_rect;
     analyze_rect.setSize(Vector2f(152, 152));
     analyze_rect.setPosition(1040, 220);
-    Text def;
+
     Font font;
+    Font f;
+    f.loadFromFile(path + "fonts/" + "Terserah.otf");
     font.loadFromFile(path + "fonts/" + "Impact.ttf");
+
+    Text def;
     def.setFont(font);
     def.setScale(Vector2f(.8, .8));
+
+    RectangleShape PRO;
+    PRO.setSize(Vector2f(280, 280));
+    PRO.setPosition(260, 260);
+    PRO.setFillColor(Color::White);
+    PRO.setOutlineThickness(2);
+    PRO.setOutlineColor(Color::Black);
+
+    Text pawn_pro;
+    pawn_pro.setString("pawn promotion");
+    pawn_pro.setFillColor(Color::Black);
+    pawn_pro.setFont(f);
+    pawn_pro.setPosition(315, 270);
+    pawn_pro.setScale(0.7, 0.7);
+
+    Texture Black_queen;
+    Black_queen.loadFromFile(path + "images/" + "QB.png");
+    Black_queen.setSmooth(true);
+    Sprite qB;
+    qB.setTexture(Black_queen);
+    qB.setPosition(300, 320);
+    qB.setScale(1.2, 1.2);
+
+    Texture Black_rook;
+    Black_rook.loadFromFile(path + "images/" + "RB.png");
+    Black_rook.setSmooth(true);
+    Sprite rB;
+    rB.setTexture(Black_rook);
+    rB.setPosition(420, 320);
+    rB.setScale(1.2, 1.2);
+
+    Texture Black_knight;
+    Black_knight.loadFromFile(path + "images/" + "NB.png");
+    Black_knight.setSmooth(true);
+    Sprite nB;
+    nB.setTexture(Black_knight);
+    nB.setPosition(305, 430);
+    nB.setScale(1.2, 1.2);
+
+    Texture Black_bishop;
+    Black_bishop.loadFromFile(path + "images/" + "BB.png");
+    Black_bishop.setSmooth(true);
+    Sprite bB;
+    bB.setTexture(Black_bishop);
+    bB.setPosition(425, 430);
+    bB.setScale(1.2, 1.2);
 
     Texture Restart;
     Restart.loadFromFile(path + "images/" + "restart.png");
@@ -125,8 +184,6 @@ void render(sf::RenderWindow &window)
     Switch.setFillColor(Color::Black);
 
     Text text;
-    Font f;
-    f.loadFromFile(path + "fonts/" + "Terserah.otf");
     text.setFont(f);
     text.setFillColor(Color::White);
     text.setOutlineThickness(5);
@@ -253,7 +310,6 @@ void render(sf::RenderWindow &window)
     RectangleShape pb;
     pb.setSize(Vector2f(60, 60));
     pb.setPosition(1135, 765);
-
     static bool clicked;
     static bool IS_CHECK;
     static bool IS_CHECKMATE;
@@ -266,8 +322,11 @@ void render(sf::RenderWindow &window)
     static bool new_board;
     static bool select_piece;
     static bool choose;
-    int r, c, px, py;
+    static bool promote;
+    static bool PrRender;
+    int r, c, rm, cm, px, py;
     char type;
+    static int Next_Player;
 
     while (window.isOpen())
     {
@@ -503,6 +562,18 @@ void render(sf::RenderWindow &window)
                     window.draw(sprite);
                 }
             }
+
+        if (promote)
+        {
+            PrRender = true;
+            window.draw(PRO);
+            window.draw(pawn_pro);
+            window.draw(qB);
+            window.draw(rB);
+            window.draw(nB);
+            window.draw(bB);
+            text.setString("Pawn Promote");
+        }
         Event event;
         while (window.pollEvent(event))
         {
@@ -532,11 +603,40 @@ void render(sf::RenderWindow &window)
                         Switch.setFillColor(Color::Black);
                     }
 
+                    if (PrRender and mouse_x > 280 && mouse_x < 500 && mouse_y > 300 && mouse_y < 520)
+                    {
+                        int piece_x = (mouse_x - 280) / 120;
+                        int piece_y = (mouse_y - 300) / 115;
+                        promote=false;
+                        PrRender=false;
+                        if(piece_x==0 and piece_y==0)
+                        {
+                            queen q;
+                            q.set(CurrentBoard,'Q',rm,cm,Next_Player,5);
+                        }
+                        else if(piece_x==0 and piece_y==1)
+                        {
+                            rook r;
+                            r.set(CurrentBoard,'R',rm,cm,Next_Player,5);
+                        }
+                        else if(piece_x==1 and piece_y==0)
+                        {
+                            knight n;
+                            n.set(CurrentBoard,'N',rm,cm,Next_Player,5);
+                        }
+                        else if(piece_x==1 and piece_y==1)
+                        {
+                            bishop b;
+                            b.set(CurrentBoard,'B',rm,cm,Next_Player,5);
+                        }
+                    }
+
                     if (new_board)
                     {
                         if (mouse_x > 875 && mouse_x < 1125 && mouse_y > 620 && mouse_y < 670)
                         {
                             set.flipturn();
+                            (set.Turn == 1) ? Next_Player = 2 : Next_Player = 1;
                             Color col;
                             if (set.Turn == 1)
                             {
@@ -577,15 +677,17 @@ void render(sf::RenderWindow &window)
                         if (clicked && mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
                         {
                             clicked = false;
-                            int r2 = (mouse_x - set.cell_offset) / (set.cell_size);
-                            int c2 = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
+                            rm = (mouse_x - set.cell_offset) / (set.cell_size);
+                            cm = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
                             for (int a = 0; a < amove.length(); a = a + 4)
-                                if (r2 == amove[a] - '0' and c2 == amove[a + 2] - '0' and set.your_turn(r, c))
+                                if (rm == amove[a] - '0' and cm == amove[a + 2] - '0' and set.your_turn(r, c))
                                 {
                                     sound_move.play();
-                                    moveit(CurrentBoard, CurrentBoard.gettype(r, c), r, c, r2, c2, CurrentBoard.getcolor(r, c), 5);
-
+                                    moveit(CurrentBoard, CurrentBoard.gettype(r, c), r, c, rm, cm, CurrentBoard.getcolor(r, c), 5);
+                                    if (Promote(rm, cm, CurrentBoard.getcolor(rm, cm)))
+                                        promote = true;
                                     set.flipturn();
+                                    (set.Turn == 1) ? Next_Player = 2 : Next_Player = 1;
 
                                     if (checkmate(CurrentBoard, set.Turn))
                                         IS_CHECKMATE = true;
@@ -599,7 +701,7 @@ void render(sf::RenderWindow &window)
                                 else
                                     warn = false;
                         }
-                        if (!clicked && mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
+                        if (!promote && !clicked && mouse_x < set.cell_offset + 8 * set.cell_size && mouse_x > set.cell_offset && mouse_y < set.cell_offset + 8 * set.cell_size && mouse_y > set.cell_offset)
                         {
                             r = (mouse_x - set.cell_offset) / (set.cell_size);
                             c = 7 - (mouse_y - set.cell_offset) / (set.cell_size);
@@ -611,7 +713,7 @@ void render(sf::RenderWindow &window)
                             clicked = false;
                     }
 
-                    if (new_board && CurrentBoard.get_king_pos(0, 1) != -1 && CurrentBoard.get_king_pos(0, 2) != -1)
+                    if (new_board && CurrentBoard.get_king_pos(0, 1) != -1 && CurrentBoard.get_king_pos(0, 2) != -1 and !Is_Check(CurrentBoard, Next_Player))
                     {
                         if (mouse_x > 1040 and mouse_x < 1190 && mouse_y > 415 && mouse_y < 565)
                         {
@@ -632,6 +734,7 @@ void render(sf::RenderWindow &window)
                         IS_CHECK = false;
                         IS_CHECKMATE = false;
                         IS_DRAW = false;
+                        promote = false;
                         restart();
                         set.Turn = 2;
                     }
