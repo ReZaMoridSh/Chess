@@ -104,11 +104,11 @@ void render(sf::RenderWindow &window)
     sound_done.setBuffer(buffer_done);
 
     Texture border_tex;
-    border_tex.loadFromFile(path+"images/"+"border.png");
+    border_tex.loadFromFile(path + "images/" + "border.png");
     Sprite border;
-    border.setPosition(820,675);
+    border.setPosition(820, 675);
     border.setTexture(border_tex);
-    border.setScale(1.5,0.7);
+    border.setScale(1.5, 0.7);
 
     Texture analyze;
     analyze.loadFromFile(path + "images/" + "Analyze.png");
@@ -235,14 +235,12 @@ void render(sf::RenderWindow &window)
     KW.setTexture(white_king);
     KW.setPosition(830, 700);
 
-
     Texture black_king;
     black_king.loadFromFile(path + "images/" + "KB.png");
     black_king.setSmooth(true);
     Sprite KB;
     KB.setTexture(black_king);
     KB.setPosition(830, 760);
- 
 
     Texture white_queen;
     white_queen.loadFromFile(path + "images/" + "QW.png");
@@ -250,7 +248,6 @@ void render(sf::RenderWindow &window)
     Sprite QW;
     QW.setTexture(white_queen);
     QW.setPosition(890, 700);
-   
 
     Texture black_queen;
     black_queen.loadFromFile(path + "images/" + "QB.png");
@@ -259,14 +256,12 @@ void render(sf::RenderWindow &window)
     QB.setTexture(black_queen);
     QB.setPosition(890, 760);
 
-
     Texture white_rook;
     white_rook.loadFromFile(path + "images/" + "RW.png");
     white_rook.setSmooth(true);
     Sprite RW;
     RW.setTexture(white_rook);
     RW.setPosition(950, 700);
- 
 
     Texture black_rook;
     black_rook.loadFromFile(path + "images/" + "RB.png");
@@ -274,7 +269,6 @@ void render(sf::RenderWindow &window)
     Sprite RB;
     RB.setTexture(black_rook);
     RB.setPosition(950, 760);
-  
 
     Texture white_knight;
     white_knight.loadFromFile(path + "images/" + "NW.png");
@@ -282,7 +276,6 @@ void render(sf::RenderWindow &window)
     Sprite NW;
     NW.setTexture(white_knight);
     NW.setPosition(1010, 700);
-  
 
     Texture black_knight;
     black_knight.loadFromFile(path + "images/" + "NB.png");
@@ -290,7 +283,6 @@ void render(sf::RenderWindow &window)
     Sprite NB;
     NB.setTexture(black_knight);
     NB.setPosition(1010, 760);
- 
 
     Texture white_bishop;
     white_bishop.loadFromFile(path + "images/" + "BW.png");
@@ -298,7 +290,6 @@ void render(sf::RenderWindow &window)
     Sprite BW;
     BW.setTexture(white_bishop);
     BW.setPosition(1070, 700);
- 
 
     Texture black_bishop;
     black_bishop.loadFromFile(path + "images/" + "BB.png");
@@ -307,7 +298,6 @@ void render(sf::RenderWindow &window)
     BB.setTexture(black_bishop);
     BB.setPosition(1070, 760);
 
-
     Texture white_pawn;
     white_pawn.loadFromFile(path + "images/" + "PW.png");
     white_pawn.setSmooth(true);
@@ -315,14 +305,13 @@ void render(sf::RenderWindow &window)
     PW.setTexture(white_pawn);
     PW.setPosition(1130, 700);
 
-
     Texture black_pawn;
     black_pawn.loadFromFile(path + "images/" + "PB.png");
     black_pawn.setSmooth(true);
     Sprite PB;
     PB.setTexture(black_pawn);
     PB.setPosition(1130, 755);
- 
+
     static bool clicked;
     static bool IS_CHECK;
     static bool IS_CHECKMATE;
@@ -339,7 +328,7 @@ void render(sf::RenderWindow &window)
     static bool PrRender;
     int r, c, rm, cm, px, py;
     char type;
-    static int Next_Player=1;
+    static int Next_Player = 1;
 
     while (window.isOpen())
     {
@@ -373,8 +362,6 @@ void render(sf::RenderWindow &window)
             window.draw(PW);
             window.draw(PB);
         }
-
-        
 
         if (set.Turn == 2 and !IS_CHECKMATE and !new_board and !IS_DRAW)
             text.setString("White's Turn");
@@ -597,27 +584,27 @@ void render(sf::RenderWindow &window)
                     {
                         int piece_x = (mouse_x - 280) / 120;
                         int piece_y = (mouse_y - 300) / 115;
-                        promote=false;
-                        PrRender=false;
-                        if(piece_x==0 and piece_y==0)
+                        promote = false;
+                        PrRender = false;
+                        if (piece_x == 0 and piece_y == 0)
                         {
                             queen q;
-                            q.set(CurrentBoard,'Q',rm,cm,Next_Player,5);
+                            q.set(CurrentBoard, 'Q', rm, cm, Next_Player, 5);
                         }
-                        else if(piece_x==1 and piece_y==0)
+                        else if (piece_x == 1 and piece_y == 0)
                         {
                             rook r;
-                            r.set(CurrentBoard,'R',rm,cm,Next_Player,5);
+                            r.set(CurrentBoard, 'R', rm, cm, Next_Player, 5);
                         }
-                        else if(piece_x==0 and piece_y==1)
+                        else if (piece_x == 0 and piece_y == 1)
                         {
                             knight n;
-                            n.set(CurrentBoard,'N',rm,cm,Next_Player,5);
+                            n.set(CurrentBoard, 'N', rm, cm, Next_Player, 5);
                         }
-                        else if(piece_x==1 and piece_y==1)
+                        else if (piece_x == 1 and piece_y == 1)
                         {
                             bishop b;
-                            b.set(CurrentBoard,'B',rm,cm,Next_Player,5);
+                            b.set(CurrentBoard, 'B', rm, cm, Next_Player, 5);
                         }
                     }
 
@@ -708,9 +695,9 @@ void render(sf::RenderWindow &window)
 
                     if (mouse_x > 1040 and mouse_x < 1190 && mouse_y > 415 && mouse_y < 565 && new_board && CurrentBoard.get_king_pos(0, 1) != -1 && CurrentBoard.get_king_pos(0, 2) != -1)
                     {
-                            SetMove(CurrentBoard, 5, -1);
-                            if(!Is_Check(CurrentBoard, Next_Player))
-                            {
+                        SetMove(CurrentBoard, 5, -1);
+                        if (!Is_Check(CurrentBoard, Next_Player))
+                        {
                             sound_click.play();
                             new_board = false;
                             select_piece = false;
@@ -718,7 +705,7 @@ void render(sf::RenderWindow &window)
                                 IS_CHECKMATE = true;
                             if (Is_Check(CurrentBoard, set.Turn) && !IS_CHECKMATE)
                                 IS_CHECK = true;
-                            }
+                        }
                     }
 
                     if (!clicked && mouse_x > 830 && mouse_x < 990 && mouse_y > 220 && mouse_y < 370)
@@ -752,7 +739,7 @@ void render(sf::RenderWindow &window)
                                 if (king_x != -1)
                                 {
                                     Null n;
-                                    n.set(CurrentBoard, type, king_x, king_y, 0, 5);
+                                    n.set(CurrentBoard, '-', king_x, king_y, 0, 5);
                                 }
                                 CurrentBoard.set_king_pos(r2, c2, py + 1);
                             }
